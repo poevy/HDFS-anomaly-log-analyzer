@@ -29,8 +29,9 @@ from sklearn.preprocessing import StandardScaler
 # --------------------------------------------------------------------------- #
 # Config
 # --------------------------------------------------------------------------- #
-DATA_DIR  = "preprocessed/"
-CKPT_DIR  = "models/"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "preprocessed")
+CKPT_DIR = os.path.join(BASE_DIR, "models")
 EVENT_COLS = [f"E{i}" for i in range(1, 30)]
 MAX_LEN   = 100
 WINDOW    = 10
