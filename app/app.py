@@ -32,6 +32,7 @@ from sklearn.preprocessing import StandardScaler
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "preprocessed")
 CKPT_DIR = os.path.join(BASE_DIR, "models")
+SAMPLE_LOG_PATH = os.path.join(BASE_DIR, "sample_log.txt")
 EVENT_COLS = [f"E{i}" for i in range(1, 30)]
 MAX_LEN   = 100
 WINDOW    = 10
@@ -564,8 +565,9 @@ col_a, col_b = st.columns([3, 1])
 with col_b:
     st.caption("Sample = 1 complete normal block + 1 complete anomalous block.")
     if st.button("Load sample (complete blocks)", use_container_width=True):
-        if os.path.exists("sample_log.txt"):
-            st.session_state["log_text"] = open("sample_log.txt", errors="replace").read()
+        if os.path.exists(SAMPLE_LOG_PATH):
+          with open(SAMPLE_LOG_PATH, "r", errors="replace") as f:
+            st.session_state["log_text"] = f.read()
         else:
             st.warning("sample_log.txt not found in the project folder.")
     st.caption("Blocks must be **complete** (full lifecycle). Truncated blocks "
